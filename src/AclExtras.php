@@ -15,7 +15,7 @@
 namespace Acl;
 
 use Acl\Controller\Component\AclComponent;
-use Cake\Console\Shell;
+use Cake\Console\ConsoleIo;
 use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
 use Cake\Core\App;
@@ -94,8 +94,8 @@ class AclExtras
     /** @var \Cake\Controller\Controller */
     protected $controller;
 
-    /** @var \Cake\Console\Shell */
-    protected $Shell;
+    /** @var \Cake\Console\ConsoleIo */
+    protected $ConsoleIo;
 
     /**
      * Start up And load Acl Component / Aco model
@@ -118,7 +118,7 @@ class AclExtras
     /**
      * Output a message.
      *
-     * Will either use shell->out, or controller->Flash->success()
+     * Will either use ConsoleIo->out, or controller->Flash->success()
      *
      * @param string $msg The message to output.
      * @return void
@@ -128,14 +128,14 @@ class AclExtras
         if (!empty($this->controller->Flash)) {
             $this->controller->Flash->success($msg);
         } else {
-            $this->Shell->out($msg);
+            $this->ConsoleIo->out($msg);
         }
     }
 
     /**
      * Output an error message.
      *
-     * Will either use shell->err, or controller->Flash->error()
+     * Will either use ConsoleIo->err, or controller->Flash->error()
      *
      * @param string $msg The message to output.
      * @return void
@@ -145,7 +145,7 @@ class AclExtras
         if (!empty($this->controller->Flash)) {
             $this->controller->Flash->error($msg);
         } else {
-            $this->Shell->err($msg);
+            $this->ConsoleIo->err($msg);
         }
     }
 
@@ -608,23 +608,23 @@ class AclExtras
     }
 
     /**
-     * Get the attached shell.
+     * Get the attached console io.
      *
-     * @return \Cake\Console\Shell
+     * @return \Cake\Console\ConsoleIo
      */
-    public function getShell()
+    public function getConsoleIo()
     {
-        return $this->Shell;
+        return $this->ConsoleIo;
     }
 
     /**
-     * Attach a shell for output.
+     * Attach a console io for output.
      *
-     * @param \Cake\Console\Shell $shell Shell to attach
+     * @param \Cake\Console\ConsoleIo $io Console io to attach
      * @return void
      */
-    public function setShell(Shell $shell)
+    public function setConsoleIo(ConsoleIo $io)
     {
-        $this->Shell = $shell;
+        $this->ConsoleIo = $io;
     }
 }
